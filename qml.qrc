@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>MainForm.ui.qml</file>
+        <file>speakerIcon.svg</file>
+        <file>playIcon.svg</file>
+        <file>pauseIcon.svg</file>
+        <file>nextTrackIcon.svg</file>
+        <file>reload.svg</file>
+        <file>gearIcon.svg</file>
+        <file>randomPlayIcon.svg</file>
+        <file>mutedIcon.svg</file>
+        <file>addToPlaylistIcon.svg</file>
+        <file>reload_pressed.svg</file>
+        <file>template_not_found.jpg</file>
+        <file>previousTrackIcon.svg</file>
+        <file>showTextButton.svg</file>
+    </qresource>
+</RCC>
