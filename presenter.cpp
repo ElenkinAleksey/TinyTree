@@ -52,11 +52,19 @@ QString Presenter::getSongTextFromFile()
     QString trackFilePath = "/home/alexey/Dropbox/Workspace/TinyTreeQMLVersion/TrackLib/" + artist + " - " + title+ ".track";
     QString songText = FileController::getSongTextFromFile(trackFilePath);
     qDebug() << "TEXT: " << songText;
-    if (songText == "") {
+    if (songText == "\n") {
         return "There's no text available";
     } else {
         return songText;
     }
+}
+
+void Presenter::editTags(QVariant artist, QVariant title, QVariant album)
+{
+    QString artistString = artist.toString();
+    QString titleString = title.toString();
+    QString albumString = album.toString();
+    player->changeTags(artistString, titleString, albumString);
 }
 
 void Presenter::playButtonClicked()

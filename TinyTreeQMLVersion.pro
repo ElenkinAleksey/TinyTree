@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     player.cpp \
     presenter.cpp \
     filecontroller.cpp \
-    webcontroller.cpp
+    webcontroller.cpp \
+    playlisttablemodel.cpp
 
 PKGCONFIG += taglib
 
@@ -24,5 +25,6 @@ HEADERS += \
     player.h \
     presenter.h \
     filecontroller.h \
-    webcontroller.h
+    webcontroller.h \
+    playlisttablemodel.h
 

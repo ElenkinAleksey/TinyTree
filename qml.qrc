@@ -7,7 +7,6 @@
         <file>pauseIcon.svg</file>
         <file>nextTrackIcon.svg</file>
         <file>reload.svg</file>
-        <file>gearIcon.svg</file>
         <file>randomPlayIcon.svg</file>
         <file>mutedIcon.svg</file>
         <file>addToPlaylistIcon.svg</file>
@@ -15,5 +14,6 @@
         <file>template_not_found.jpg</file>
         <file>previousTrackIcon.svg</file>
         <file>showTextButton.svg</file>
+        <file>tagSettings.svg</file>
     </qresource>
 </RCC>

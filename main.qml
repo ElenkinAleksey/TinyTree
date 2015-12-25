@@ -106,6 +106,101 @@ Window {
                         }
                     }
 
+                    Dialog {
+                        id: editTagsDialog
+                        title: "Edit Tags"
+                        modality: Qt.NonModal
+                        standardButtons: StandardButton.Save | StandardButton.Cancel
+                        height: 150
+                        width: 300
+                        GridLayout {
+                            columns: 2
+                            width: 300
+                            rowSpacing: 15
+                            Label {
+                                id: artistTagLabel
+                                x: 20
+                                y: 20
+                                height: 23
+                                text: "Artist:"
+                            }
+
+                            Rectangle {
+                                id: artistTagEditBackground
+                                x: artistTagLabel.x + artistTagLabel.width + 10
+                                y: artistTagLabel.y
+                                width: 210
+                                height: 23
+                                radius: 3
+                                border.width: 1
+                                border.color: "black"
+                                color: "white"
+                                TextEdit {
+                                    id: artistTagEdit
+                                    x: 5
+                                    y: artistTagEditBackground.y + 2
+                                    width: artistTagEditBackground.width
+                                }
+                             }
+                            Label {
+                                id: titleTagLabel
+                                x: 20
+                                y: 50
+                                height: 23
+                                text: "Title:"
+                            }
+
+                            Rectangle {
+                                id: titleTagEditBackground
+                                x: titleTagLabel.x + titleTagLabel.width + 10
+                                y: titleTagLabel.y
+                                width: 210
+                                height: 23
+                                radius: 3
+                                border.width: 1
+                                border.color: "black"
+                                color: "white"
+                                TextEdit {
+                                    id: titleTagEdit
+                                    x: 5
+                                    y: 2
+                                    width: titleTagEditBackground.width
+                                }
+                             }
+                            Label {
+                                id: albumTagLabel
+                                x: 20
+                                y: 50
+                                height: 23
+                                text: "Album:"
+                            }
+
+                            Rectangle {
+                                id: albumTagEditBackground
+                                x: albumTagLabel.x + albumTagLabel.width + 10
+                                y: albumTagLabel.y
+                                width: 210
+                                height: 23
+                                radius: 3
+                                border.width: 1
+                                border.color: "black"
+                                color: "white"
+                                TextEdit {
+                                    id: albumTagEdit
+                                    x: 5
+                                    y: 2
+                                    width: albumTagEditBackground.width
+                                }
+                             }
+                        }
+                        onAccepted: {
+                            var artist = artistTagEdit.text;
+                            var title = titleTagEdit.text;
+                            var album = albumTagEdit.text;
+                            _presenter.editTags(artist, title, album);
+                        }
+                    }
+
                     Tab {
                         id: tab1
                         objectName: "tab1"
@@ -270,10 +365,10 @@ Window {
                                 Image {
                                     id: showTextButton
                                     x: infoGridView.x + infoGridView.width - 30
-                                    y: infoGridView.y + infoGridView.height - 30
+                                    y: infoGridView.y + infoGridView.height - 33
                                     width: 27
-                                    height: 23
-                                    sourceSize.height: 23
+                                    height: 27
+                                    sourceSize.height: 27
                                     sourceSize.width: 27
                                     source: "showTextButton.svg"
                                     MouseArea {
@@ -284,6 +379,27 @@ Window {
                                         }
                                     }
                                 }
+
+                                Image {
+                                    id: editTagsDialogButton
+                                    x:  infoGridView.x + infoGridView.width - 70
+                                    y: showTextButton.y - 1
+                                    width: 27
+                                    height: 27
+                                    sourceSize.height: 27
+                                    sourceSize.width: 27
+                                    source: "tagSettings.svg"
+                                    MouseArea {
+                                        width: editTagsDialogButton.width
+                                        height: editTagsDialogButton.height
+                                        onClicked: {editTagsDialog.open();
+                                            artistTagEdit.text = artistNameInfo.text;
+                                            titleTagEdit.text = trackNameInfo.text;
+                                            albumTagEdit.text = albumNameInfo.text;
+                                        }
+                                    }
+                                }
+
 //                                Label {
 //                                    id: bitRateInfoLabel
 //                                    text: "Bit Rate:"
@@ -529,40 +645,33 @@ Window {
                 }
                 TableView{
                     id: playlistView
-                    x: 186
+                    x: 10
                     y: 255
                     width: mainForm.width - playlistView.x - 5
                     height: mainForm.height - playlistView.y - 35
                     sortIndicatorVisible: true
                     TableViewColumn {
                         id: numberColumn
-                        role: "number"
+                        role: "role_number"
                         title: ""
                         width: 25
-                        delegate:
-                            Text {
-                            id: rowNumber
-
-                        }
                     }
                     TableViewColumn {
-                        role: "title"
+                        role: "role_title"
                         title: "Title"
                         width: 150
                     }
                     TableViewColumn {
-                        role: "artist"
+                        role: "role_artist"
                         title: "Artist"
                         width: 150
                     }
                     TableViewColumn {
-                        role: "album"
+                        role: "role_album"
                         title: "Album"
                         width: 200
                     }
-                    model: ListModel{
-
-                    }
+                    model: _model
                 }
             }
         }

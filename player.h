@@ -28,6 +28,8 @@ class Player : public QObject
     Q_OBJECT
     QMediaPlayer *mediaPlayer;
     qint64 trackDuration;
+    int trackCount;
+    QStringList metaData;
 public:
     Player();
     ~Player();
@@ -46,6 +48,7 @@ signals:
     void setTrackInfoToView(QString&, QString&, QString&, QString&, QString&, QString&);
     void checkTemplate(int);
     void playerStopped();
+    void addTrackToPlaylist(int number, QString title, QString artist, QString album);
 
 public slots:
     void playTrack();
@@ -59,6 +62,7 @@ public slots:
     void goToNextTrack();
     void goToPreviousTrack();
     void dataChanged();
+    void changeTags(QString artist, QString title, QString album);
 
 //    void open();
 };

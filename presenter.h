@@ -19,6 +19,7 @@ public:
     bool playFlag;
 
     Q_INVOKABLE QString getSongTextFromFile();
+    Q_INVOKABLE void editTags(QVariant artist, QVariant title, QVariant album);
 protected:
     QObject *viewer, *qmlPlayer;
     QObject *volumeSlider;

@@ -21,6 +21,7 @@ Player::Player()
     mediaPlaylist = new QMediaPlaylist;
     mediaPlayer->setPlaylist(mediaPlaylist);
     mediaPlayer->setVolume(50);
+    trackCount = 0;
     this->repeatTrackFlag = false;
     QObject::connect(mediaPlayer,SIGNAL(positionChanged(qint64)), SLOT(positionChanged(qint64)));
     connect(mediaPlaylist,SIGNAL(currentIndexChanged(int)),SLOT(dataChanged()));
@@ -168,6 +169,13 @@ void Player::addToPlaylist(QString filePath)
         qDebug() << mediaPlaylist->mediaCount();
         qDebug() << "Current index: " << mediaPlaylist->currentIndex();
     }
+    int number = ++trackCount;
+    metaData = FileController::getMetaDataFromFile(url.toString());
+    QString title = metaData[0];
+    QString artist = metaData[1];
+    QString album = metaData[2];
+    qDebug() << number << title << artist << album;
+    emit addTrackToPlaylist(number, title, artist, album);
 }
 
 void Player::goToNextTrack()
@@ -195,6 +203,13 @@ void Player::dataChanged()
 {
     setTrackInfoToView();
     getTemplate();
+}
+
+void Player::changeTags(QString artist, QString title, QString album)
+{
+    QString url = mediaPlayer->currentMedia().canonicalUrl().toString();
+    FileController::editTags(url, artist, title, album);
+    qDebug () << url << artist << title << album;
 }
 
 int Player::getTemplate()

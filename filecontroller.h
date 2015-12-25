@@ -16,6 +16,12 @@
 #include <QXmlStreamReader>
 #include "webcontroller.h"
 
+#include "taglib.h"
+#include <tbytevector.h>//ByteVector
+#include <mpegfile.h>//mp3 file
+#include <id3v2tag.h>//tag
+#include <id3v2frame.h>//frame
+
 class FileController
 {
 
@@ -26,6 +32,8 @@ public:
     static void editTrackFile(QString trackPath, QString trackFilePath, QString artistName, QString trackName, QString albumName, QString year, QString genre);
     static QString getCoverURLFromFile(QString trackFilePath);
     static QString getSongTextFromFile(QString trackFilePath);
+    static QStringList getMetaDataFromFile(QString url);
+    static void editTags(QString url, QString artist, QString title, QString album);
 
 signals:
 
